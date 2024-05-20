@@ -1,0 +1,12 @@
+{
+  "name": "health-buddy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd frontend && bun run dev",
+    "server": "cd backend && bun run dev"
+  },
+  "author": "Dhruv Kapoor",
+  "license": "MIT"
+}
