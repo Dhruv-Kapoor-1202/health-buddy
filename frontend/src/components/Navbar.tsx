@@ -42,6 +42,7 @@ const routeList: RouteProps[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const token = localStorage.getItem("token");
 
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
@@ -92,20 +93,34 @@ export const Navbar = () => {
                     Github
                   </a> */}
 
-                  <Link
-                    to="/signup"
-                    className={`border ${buttonVariants({
-                      variant: "default",
-                    })}`}>
-                    Sign Up
-                  </Link>
-                  <Link
-                    to="/login"
-                    className={`border ${buttonVariants({
-                      variant: "secondary",
-                    })}`}>
-                    Login
-                  </Link>
+                  {token ? (
+                    <>
+                      <Link
+                        to="/dashboard"
+                        className={`border ${buttonVariants({
+                          variant: "default",
+                        })}`}>
+                        Dashboard
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/signup"
+                        className={`border ${buttonVariants({
+                          variant: "default",
+                        })}`}>
+                        Sign Up
+                      </Link>
+                      <Link
+                        to="/login"
+                        className={`border ${buttonVariants({
+                          variant: "secondary",
+                        })}`}>
+                        Login
+                      </Link>
+                    </>
+                  )}
                 </nav>
               </SheetContent>
             </Sheet>
@@ -134,16 +149,34 @@ export const Navbar = () => {
               <GitHubLogoIcon className="mr-2 w-5 h-5" />
               Github
             </a> */}
-            <Link
-              to="/signup"
-              className={`border ${buttonVariants({ variant: "default" })}`}>
-              Sign Up
-            </Link>
-            <Link
-              to="/login"
-              className={`border ${buttonVariants({ variant: "secondary" })}`}>
-              Login
-            </Link>
+            {token ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className={`border ${buttonVariants({
+                    variant: "default",
+                  })}`}>
+                  Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/signup"
+                  className={`border ${buttonVariants({
+                    variant: "default",
+                  })}`}>
+                  Sign Up
+                </Link>
+                <Link
+                  to="/login"
+                  className={`border ${buttonVariants({
+                    variant: "secondary",
+                  })}`}>
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </NavigationMenuList>
       </NavigationMenu>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
 
 interface FormData {
   email: string;
@@ -43,9 +44,16 @@ export function Signup(): JSX.Element {
     try {
       const response = await axios.post("http://localhost:3000/signup", data);
       console.log(response.data);
+      toast({
+        title: "Account Created Successfully",
+      });
       navigate("/login");
     } catch (err) {
       console.error(err);
+      toast({
+        variant: "destructive",
+        title: "Error Creating User Account",
+      });
     }
   };
 

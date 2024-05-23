@@ -4,6 +4,10 @@ import { Landing } from "./pages/Landing";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
+import { Layout } from "./components/Layout";
+import { Appointments } from "./pages/Appointments";
+import { Toaster } from "@/components/ui/toaster";
+import { Apply } from "./pages/Apply";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -16,15 +20,41 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
 
-        {token ? (
-          <Route path="/dashboard" element={<Dashboard />} />
-        ) : (
+        {!token ? (
           <Route path="*" element={<Login />} />
+        ) : (
+          <>
+            <Route
+              path="/dashboard"
+              element={
+                <Layout>
+                  <Dashboard />
+                </Layout>
+              }
+            />
+            <Route
+              path="/appointments"
+              element={
+                <Layout>
+                  <Appointments />
+                </Layout>
+              }
+            />
+            <Route
+              path="/apply"
+              element={
+                <Layout>
+                  <Apply />
+                </Layout>
+              }
+            />
+          </>
         )}
       </Routes>
     </>

@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
+// import { useDispatch } from "react-redux";
 
 interface FormData {
   username: string;
@@ -24,6 +26,8 @@ interface ApiResponse {
 }
 
 export function Login() {
+  // const dispatch = useDispatch();
+
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
@@ -55,9 +59,17 @@ export function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
 
+      toast({
+        title: "Logged in Successfully",
+      });
+
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
+      toast({
+        variant: "destructive",
+        title: "Error Logging In",
+      });
     }
   };
 
