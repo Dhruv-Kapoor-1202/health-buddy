@@ -1,20 +1,22 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import connectDB from './config/mongo.js';
-import authRoutes from './routes/auth.routes.js';
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import connectDB from "./config/mongo.js";
+import authRoutes from "./routes/auth.routes.js";
+import morgan from "morgan";
 
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(morgan("dev"));
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
-app.use('/', authRoutes);
+app.use("/", authRoutes);
 
 connectDB();
 
