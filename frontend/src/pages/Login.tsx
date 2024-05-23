@@ -5,7 +5,8 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "@/components/ui/use-toast";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlice.ts";
 
 interface FormData {
   username: string;
@@ -26,7 +27,7 @@ interface ApiResponse {
 }
 
 export function Login() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -59,6 +60,8 @@ export function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
 
+      getUser();
+
       toast({
         title: "Logged in Successfully",
       });
@@ -70,6 +73,29 @@ export function Login() {
         variant: "destructive",
         title: "Error Logging In",
       });
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const username = localStorage.getItem("username");
+
+      const res = await axios.post<ApiResponse>(
+        "http://localhost:3000/getUserData",
+        username
+      );
+
+      console.log(res);
+
+      if (res.status === 200) {
+        dispatch(setUser(res.data));
+      } else {
+        localStorage.clear();
+        navigate("/login");
+      }
+    } catch (error) {
+      localStorage.clear();
+      console.log(error);
     }
   };
 

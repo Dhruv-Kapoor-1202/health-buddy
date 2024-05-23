@@ -88,24 +88,23 @@ export async function signIn(req, res) {
   }
 }
 
-// export async function authController(req, res) {
-//   try {
-//     const { userId } = req.body;
-//     const existingUser = await User.findById({ _id: userId });
+export async function getUserData(req, res) {
+  try {
+    const { username } = req.body;
+    const existingUser = await User.find({ username: username });
 
-//     if (!existingUser) {
-//       return res.status(404).json({ message: "User doesn't exist" });
-//     }
+    if (!existingUser) {
+      return res.status(404).json({ message: "User doesn't exist" });
+    }
 
-//     return res.status(200).json({ data: existingUser });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: `Server error\n${error.message}` });
-//   }
-// }
+    return res.status(200).json({ data: existingUser });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: `Server error. ${error.message}` });
+  }
+}
 
 // Apply For Doctor
-
 export async function applyDoctorController(req, res) {
   try {
     const {

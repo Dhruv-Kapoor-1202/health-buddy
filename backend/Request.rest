@@ -25,12 +25,12 @@ Content-Type: application/json
 
 ###
 
-# POST http://localhost:3000/getUserData HTTP/1.1
-# Content-Type: application/json
+POST http://localhost:3000/getUserData HTTP/1.1
+Content-Type: application/json
 
-# {
-#   "userId": "664f4db1f7b5bc2ce0fb46f8",
-# }
+{
+  "username": "ani2005"
+}
 
 ###
 
