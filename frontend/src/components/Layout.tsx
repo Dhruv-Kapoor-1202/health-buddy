@@ -41,8 +41,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { toast } from "./ui/use-toast";
+import { ModeToggle } from "./mode-toggle";
+// import { Avatar, AvatarFallback } from "./ui/avatar";
+// import { useSelector } from "react-redux";
 
 export const Layout = ({ children }: LayoutProps) => {
+  // const { user } = useSelector((state) => state.user);
+
   // const location = useLocation();
   const navigate = useNavigate();
 
@@ -208,10 +213,17 @@ export const Layout = ({ children }: LayoutProps) => {
               </div>
             </form>
           </div>
+          <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleIcon className="h-5 w-5" />
+                <CircleIcon className="size-6 text-foreground" />
+                {/* <Avatar className="size-5">
+                  <AvatarFallback>
+                    {user?.firstName[0]}
+                    {user?.lastName[0]}
+                  </AvatarFallback>
+                </Avatar> */}
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>

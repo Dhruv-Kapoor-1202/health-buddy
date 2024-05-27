@@ -19,23 +19,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const invoices = [
   {
     id: "1",
-    name: "Gregory House",
+    firstName: "Gregory",
+    lastName: "House",
     timings: "09:00-17:00",
     speciality: "Diagnostics",
   },
   {
     id: "2",
-    name: "James Wilson",
+    firstName: "James",
+    lastName: "Wilson",
     timings: "09:00-17:00",
     speciality: "Neurology",
   },
   {
     id: "3",
-    name: "Lisa Cuddy",
+    firstName: "Lisa",
+    lastName: "Cuddy",
     timings: "Night Shift",
     speciality: "Pathology",
   },
@@ -74,7 +78,9 @@ export function Dashboard() {
                       <TableCell className="font-medium ">
                         {invoice.id}
                       </TableCell>
-                      <TableCell>Dr. {invoice.name}</TableCell>
+                      <TableCell>
+                        Dr. {invoice.firstName} {invoice.lastName}
+                      </TableCell>
                       <TableCell>{invoice.speciality}</TableCell>
                       <TableCell className="text-right">
                         {invoice.timings}
@@ -106,14 +112,22 @@ export function Dashboard() {
             <CardContent className="space-y-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-4">
                 {invoices.map((invoice) => (
-                  <Card key={invoice.id}>
+                  <Card
+                    key={invoice.id}
+                    className="hover:shadow-lg duration-300 dark:shadow-muted-foreground/10">
                     <CardHeader className="font-medium flex justify-center items-center ">
                       {/* <div>{invoice.id}</div> */}
-                      <div className="size-28 md:size-52 ring ring-border rounded-full">
+                      {/* <div className="size-28 md:size-52 ring ring-border rounded-full">
                         {" "}
-                      </div>
+                      </div> */}
+                      <Avatar className="size-28 md:size-52">
+                        <AvatarFallback className="text-5xl">
+                          {invoice.firstName[0]}
+                          {invoice.lastName[0]}
+                        </AvatarFallback>
+                      </Avatar>
                       <CardTitle className="font-medium text-lg pt-4">
-                        Dr. {invoice.name}
+                        Dr. {invoice.firstName} {invoice.lastName}
                       </CardTitle>
                       <CardDescription>{invoice.speciality}</CardDescription>
                     </CardHeader>
